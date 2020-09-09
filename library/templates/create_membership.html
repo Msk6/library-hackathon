@@ -9,8 +9,9 @@
     <h5 class="card-header">Create new membership</h5>
     <div class="card-body">
         <p class="card-text">
-            <form action="{% url 'create-membership' %}" method="POST">
+            <form action="{% url 'create-membership' %}" method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
+
                 {{form|crispy}}
                 <input type="submit" value="Create" class="btn btn-outline-primary">
             </form>

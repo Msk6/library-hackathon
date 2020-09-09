@@ -23,6 +23,10 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('signin/', views.signin, name='signin'),
     path('create_membership/', views.create_membership, name='create-membership'),
+    path('add_book/', views.add_book, name='add-book'),
+    path('book_list/', views.books_list, name='book-list'),
+    path('book_detail/<int:book_id>', views.book_detail, name='book-detail'),
+
 ]
 
 if settings.DEBUG:

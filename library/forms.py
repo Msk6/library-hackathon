@@ -1,5 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
+from .models import Book
 
 class SigninForm(forms.Form):
     username = forms.CharField(required=True)
@@ -14,3 +15,9 @@ class SignupForm(forms.ModelForm):
         widgets={
         'password': forms.PasswordInput(),
         }
+
+
+class AddBookForm(forms.ModelForm):
+    class Meta:
+        model = Book
+        fields = '__all__'
