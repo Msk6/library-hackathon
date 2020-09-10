@@ -9,14 +9,17 @@ class Librarian(models.Model):
     def __str__(self):
         return self.user.username
 
+class UserModel(User):
+    is_librarian = models.BooleanField(default=False)
+    has_paid = models.BooleanField(default=False)
 
 class Book(models.Model):
     # Details
-    name = models.CharField(max_length=550)
-    author = models.CharField(max_length=250)
+    name = models.CharField(max_length=50)
+    author = models.CharField(max_length=50)
     year_of_release = models.IntegerField()
-    ISBN = models.IntegerField(unique=True,)
-    genre = models.TextField(max_length=650)
+    ISBN = models.IntegerField(unique=True)
+    genre = models.TextField(max_length=50)
     image = models.ImageField(blank=True, null=True)
 
     def __str__(self):

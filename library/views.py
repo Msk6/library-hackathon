@@ -11,7 +11,7 @@ import datetime
 def signin(request):
     form = SigninForm() 
     if request.method == 'POST':
-        form = SigninForm(request.POST, request.FILES)
+        form = SigninForm(request.POST)
         if form.is_valid():
             username = form.cleaned_data['username']
             password = form.cleaned_data['password']
@@ -34,12 +34,8 @@ def signout(request):
 
 def create_membership(request):
     # permision
-    if not request.user.is_authenticated:
+    if not request.user.is_librarian:
         return redirect('signin')
-    try:
-        user_obj = Librarian.objects.get(user=request.user)
-    except:
-       return redirect('signin')
     
     form = SignupForm()
     if request.method == 'POST':
@@ -117,9 +113,13 @@ def book_detail(request, book_id):
         is_lib = True
     except:
         is_lib = False
+
+    user_obj = Librarian.objects.filter(user=request.user).exists()
     
+
     book = Book.objects.get(id=book_id)
-    logs = book.logs.all()
+    if user_obj:
+        logs = book.logs.all()
     try:
         last_log = book.logs.get(return_date__isnull=True)
         available = False
