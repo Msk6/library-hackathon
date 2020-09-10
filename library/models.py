@@ -28,8 +28,8 @@ class Log(models.Model):
     availability = models.BooleanField(default=False)
     borrow_date = models.DateTimeField(auto_now_add=True)
     return_date = models.DateTimeField(blank=True, null=True)
-    user = models.ForeignKey(User, on_delete=models.PROTECT, related_name='logs')
-    book = models.ForeignKey(Book, on_delete=models.PROTECT, related_name='logs')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, related_name='logs')
+    book = models.ForeignKey(Book, on_delete=models.CASCADE, related_name='logs')
 
     def set_book(self, book):
         self.book = book
