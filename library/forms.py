@@ -1,6 +1,6 @@
 from django import forms
 from django.contrib.auth.models import User
-from .models import Book
+from .models import Book, Log
 
 class SigninForm(forms.Form):
     username = forms.CharField(required=True)
@@ -21,3 +21,14 @@ class AddBookForm(forms.ModelForm):
     class Meta:
         model = Book
         fields = '__all__'
+
+
+class AddLog(forms.ModelForm):
+    class Meta:
+        model = Log
+        fields = ['user',]
+        '''exclude = ['availability', 'borrow_date', 'return_date', 'book',]'''
+
+        '''widgets = {
+            'user': forms.Select(User.objects.all().values('username'))
+        }'''

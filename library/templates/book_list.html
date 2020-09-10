@@ -4,6 +4,24 @@
 
 {% block content %}
 <br>
+<div class="dropdown">
+    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Go to..
+    </a>
+    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+    {% if request.user.is_authenticated %}    
+        {% if is_lib %}
+            <a class="dropdown-item" href="{% url 'add-book' %}">Add book</a>
+            <a class="dropdown-item" href="{% url 'create-membership' %}">Add membership</a>
+        {% else %}
+            <a class="dropdown-item" href="#">Profile</a>
+        {% endif %}
+    {% endif %}
+    
+    </div>
+  </div>
+  <br>
+
 <div class="row">
     {% for book in books %}
     <a href="{% url 'book-detail' book.id %}">
@@ -19,10 +37,12 @@
                 <p class="card-text">{{book.ISBN}}</p>
                 <p class="card-text">{{book.genre}}</p>
                 <br>
+                {% if is_lib and request.user.is_authenticated %}
                 <div class="row">
-                    <a href="#" class="btn btn-outline-dark col-5 m-1">Emborrow</a>
-                    <a href="#" class="btn btn-outline-dark col-5 m-1">Returned</a>
+                    <a href="{% url 'add-log' book_id=book.id %}" class="btn btn-outline-dark col-5 m-1">Borrow</a>
+                    <a href="{% url 'return-book' book_id=book.id %}" class="btn btn-outline-dark col-5 m-1">Returned</a>
                 </div>
+                {% endif %}
             </div>
 
             

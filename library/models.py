@@ -30,3 +30,15 @@ class Log(models.Model):
     return_date = models.DateTimeField(blank=True, null=True)
     user = models.ForeignKey(User, on_delete=models.PROTECT, related_name='logs')
     book = models.ForeignKey(Book, on_delete=models.PROTECT, related_name='logs')
+
+    def set_book(self, book):
+        self.book = book
+        return
+
+    def set_availability(self, availability):
+        self.availability = availability
+        return
+
+    def set_return_date(self, return_date):
+        self.return_date = return_date
+        return

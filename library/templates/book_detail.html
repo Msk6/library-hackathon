@@ -7,7 +7,9 @@
 <div class="row">
 <div id="list-example" class="list-group col-2">
     <a class="list-group-item list-group-item-action" href="#list-item-1">Book info</a>
-    <a class="list-group-item list-group-item-action" href="#list-item-2">Book Logs</a>
+    {% if is_lib and request.user.is_authenticated %}
+        <a class="list-group-item list-group-item-action" href="#list-item-2">Book Logs</a>
+    {% endif %}
   </div>
   <div data-spy="scroll" data-target="#list-example" data-offset="0" class="scrollspy-example col-10">
     <h4 id="list-item-1">Book info</h4>
@@ -22,7 +24,7 @@
             <p class="card-text">{{book.year_of_release}}</p>
             <p class="card-text">{{book.ISBN}}</p>
             <p class="card-text">{{book.genre}}</p>
-            {% if  log.availability %}
+            {% if  available %}
                 <p class="btn btn-success">Available</p>
             {% else %}
                 <p class="btn btn-danger">Unavailable</p>
@@ -30,29 +32,30 @@
           </div>
         </div>
     </div>
-
-    <h4 id="list-item-2">Book logs</h4>
-    <table class="table">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">Book</th>
-            <th scope="col">User</th>
-            <th scope="col">Borrow date</th>
-            <th scope="col">Return date</th>
-          </tr>
-        </thead>
-        <hr>
-        <tbody>
-            {% for log in logs %}
-                <tr>
-                    <td>{{log.book.name}}</td>
-                    <td>{{log.user.username}}</td>
-                    <td>{{log.borrow_date}}</td>
-                    <td>{{log.return_date}}</td>  
-                </tr>
-            {% endfor %}
-        </tbody>
-      </table>
+    {% if is_lib and request.user.is_authenticated %}
+        <h4 id="list-item-2">Book logs</h4>
+        <table class="table">
+            <thead class="thead-dark">
+            <tr>
+                <th scope="col">Book</th>
+                <th scope="col">User</th>
+                <th scope="col">Borrow date</th>
+                <th scope="col">Return date</th>
+            </tr>
+            </thead>
+            <hr>
+            <tbody>
+                {% for log in logs %}
+                    <tr>
+                        <td>{{log.book.name}}</td>
+                        <td>{{log.user.username}}</td>
+                        <td>{{log.borrow_date}}</td>
+                        <td>{{log.return_date}}</td>  
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+      {% endif %}
     </div>
 </div>
 
