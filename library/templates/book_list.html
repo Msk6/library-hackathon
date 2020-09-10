@@ -5,7 +5,7 @@
 {% block content %}
 <br>
 <div class="dropdown">
-    <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+    <a class="btn btn-warning dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       Go to..
     </a>
     <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
@@ -14,7 +14,9 @@
             <a class="dropdown-item" href="{% url 'add-book' %}">Add book</a>
             <a class="dropdown-item" href="{% url 'create-membership' %}">Add membership</a>
         {% else %}
-            <a class="dropdown-item" href="#">Profile</a>
+            <a class="dropdown-item" href="{% url 'profile' %}">Personal info</a>
+            <a class="dropdown-item" href="{% url 'my-history' %}">My history</a>
+            <a class="dropdown-item" href="{% url 'reversed' %}">Current book</a>
         {% endif %}
     {% endif %}
     

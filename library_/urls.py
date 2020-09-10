@@ -30,6 +30,9 @@ urlpatterns = [
     path('book_detail/<int:book_id>', views.book_detail, name='book-detail'),
     path('add_log/<int:book_id>', views.add_log, name='add-log'),
     path('return_book/<int:book_id>', views.return_book, name='return-book'),
+    path('history/', views.history, name='my-history'),
+    path('reversed_books/', views.reversed_books, name='reversed'),
+    path('profile/', views.profile, name='profile'),
 
 ]
 

@@ -192,6 +192,54 @@ def return_book(request, book_id):
     except:
         messages.success(request, 'The book is availlable')
         return redirect('book-list')
+
+def history(request):
+    if not request.user.is_authenticated:
+        return redirect('signin')
+    try:
+        user_obj = Librarian.objects.get(user=request.user) 
+        return redirect('signin')   
+
+    except:
+        user_obj = request.user
+        user_logs = user_obj.logs.all()
+        #user_logs = Log.objects.filter(user=request.user)
+        context = {
+            'user_logs': user_logs,
+        }
+
+        return render(request, 'history.html', context)
+
+
+def reversed_books(request):
+    if not request.user.is_authenticated:
+        return redirect('signin')
+    try:
+        user_obj = Librarian.objects.get(user=request.user) 
+        return redirect('signin') 
+    except: 
+        user_obj = request.user
+        user_logs = user_obj.logs.filter(return_date__isnull=True)
+        #user_logs = Log.objects.filter(user=request.user)
+        context = {
+            'user_logs': user_logs,
+        }
+
+        return render(request, 'reversed_books.html', context)
+
+def profile(request):
+    if not request.user.is_authenticated:
+        return redirect('signin')
+    try:
+        user_obj = Librarian.objects.get(user=request.user) 
+        return redirect('signin') 
+    except: 
+        context = {
+            'user': request.user
+        }
+
+        return render(request, 'personal_info.html', context)
+
     
 
 

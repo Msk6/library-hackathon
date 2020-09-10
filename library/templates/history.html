@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %}List{% endblock title %}
+
+{% block content %}
+    <table class="table">
+        <thead class="thead-light">
+        <tr>
+            <th scope="col">Your history</th>
+        </tr>
+        </thead>
+        <hr>
+        <tbody>
+            {% for log in user_logs %}
+                <tr>
+                    <td>{{log.book.name}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock content %}
